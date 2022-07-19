@@ -3,6 +3,12 @@
 # gpl v3 copyright George R Carder
 
 npx hardhat compile > tmp_sol_compile_logs.txt
+exitCode=$?
+if [ $exitCode -ne 0 ]; then
+    rm tmp_sol_compile_logs.txt
+    exit $exitCode
+fi
+
 wasCompiled=$(cat tmp_sol_compile_logs.txt | grep Compiled)
 rm tmp_sol_compile_logs.txt
 notTestedFilename=".notTested.txt"
